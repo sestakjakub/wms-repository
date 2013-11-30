@@ -1,0 +1,48 @@
+{* This is the welcome page, you can delete it *}
+{block head}
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+{/block}
+
+{block content}
+
+<div data-role="content">
+    <ul data-role="listview">  
+        <li data-role="list-divider">
+            {$layer->title}
+        </li>
+        <li><h3>Name: {$layer->name}</h3></li>
+        <li><p>Abstract: {$layer->abstract}</p></li>
+    </ul>
+    <h1></h1>
+</div>
+    
+<div id = "map" style="min-height: 320px; height: 100%; "></div>
+<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+<script>
+
+            var map = L.map('map').setView([{$ycenter}, {$xcenter}], 6);
+
+
+
+            L.tileLayer('http://{l}s{r}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{l}z{r}/{l}x{r}/{l}y{r}.png', {
+                    maxZoom: 18,
+                    attribution: 'Map dat'
+            }).addTo(map);
+
+            var polygon = L.polygon([
+                [{!$layer->bBoxNorth}, {!$layer->bBoxWest}],
+                [{!$layer->bBoxNorth}, {!$layer->bBoxEast}],
+                [{!$layer->bBoxSouth}, {!$layer->bBoxEast}],
+                [{!$layer->bBoxSouth}, {!$layer->bBoxWest}]
+            ]).addTo(map);
+
+
+
+
+
+</script>
+{/block}
+
+
+
+

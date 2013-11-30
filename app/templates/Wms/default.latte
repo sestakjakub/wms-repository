@@ -1,0 +1,43 @@
+{block content}
+
+<div data-role="content">
+    <table data-role="table" id="wms-table" data-mode="reflow"
+           class="ui-responsive table-stroke ui-table ui-table-reflow">
+        <thead>
+          <tr>
+            <th data-priority="1">Title</th>
+            <th data-priority="1">Abstract</th>
+            <th data-priority="5">BBox</th>
+            <th data-priority="5">Map</th>
+            
+
+          </tr>
+        </thead>
+        <tbody>
+        {foreach $layers as $layer}
+    
+            <tr>
+            <th>
+                <a href="{link Layer:default $layer->id}">{$layer->title}</a>
+            </th>
+            <td>
+                {$layer->abstract}
+            </td>
+            <td>
+                <a href="{link Layer:bbox $layer->id}">BBox</a>
+            </td>
+            <td>
+                <a ref="{link Layer:map $layer->id}">Map</a>
+            </td>
+            
+        </tr>
+         {/foreach}
+        </tbody>
+    </table>
+   
+</div>
+{/block}
+
+
+
+

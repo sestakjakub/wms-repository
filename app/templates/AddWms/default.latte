@@ -1,0 +1,21 @@
+{block content}
+
+<div data-role="content">
+    <form method="GET" action="addWms2.php" >
+    <p>WMS adress: 
+        <input type="text" name="address" size="80"> 
+        <input type="submit" value="Add WMS">
+    </p>
+    </form>
+
+    <h2>Test wms:</h2>
+    <ul>
+        {foreach $wmss as $wms}
+        <li>
+        <a  href="{link AddWms:Add $wms}">{$wms}</a>
+        </li>
+        {/foreach}
+    </ul>
+
+</div>
+{/block}

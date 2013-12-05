@@ -8,12 +8,10 @@
             WMS
         </li>
         <li><p>WMS url: {$wms->wmsUrl}</p></li>
-         <li data-role="list-divider">
+        <li data-role="list-divider">
             Hierarchy
         </li>
-        
         <li>
-        
             <table data-role="table" id="wms-table" data-mode="reflow"
                     class="ui-responsive table-stroke ui-table ui-table-reflow">
                  <thead>
@@ -31,40 +29,25 @@
                      <td>{$wms->title}</td>
                      <td>{$wms->abstract}</td>
                  </tr>
-                 {if ($upperUpperLayer != null)}
-                 <tr>
-                     <th>upper upper layer</th>
-                     <td>{$upperUpperLayer->name}</td>
-                     <td>{$upperUpperLayer->title}</td>
-                     <td>{$upperUpperLayer->abstract}</td>
-                 </tr>
-                 {/if}
-                 {if ($upperLayer != null)}
-                 <tr>
-                     <th>upper layer</th>
-                     <td>{$upperLayer->name}</td>
-                     <td>{$upperLayer->title}</td>
-                     <td>{$upperLayer->abstract}</td>
-                 </tr>
-                 {/if}
-                 <tr>
-                     <th>layer</th>
-                     <td>{$layer->name}</td>
-                     <td>{$layer->title}</td>
-                     <td>{$layer->abstract}</td>
-                 </tr>
-
-
+                 {include #layerRow}
                  </tbody>
              </table>
-        
         </li>
- 
     </ul>
-
 </div>
 {/block}
 
-
-
-
+{block layerRow}
+    <tr>
+        <th>{$layerText}</th>
+        <td>{$layer->name}</td>
+        <td>{$layer->title}</td>
+        <td>{$layer->abstract}</td>
+    </tr>
+    
+    {if ($layer->layer != null)}
+            {? $layerText = "upper ".$layerText}
+            {include #layerRow, layer => $layer->layer}
+    {/if}
+    
+{/block}

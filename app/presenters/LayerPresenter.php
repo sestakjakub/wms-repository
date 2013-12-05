@@ -24,6 +24,13 @@ class LayerPresenter extends BasePresenter
                 $layer = $this->layerRepository->GetById($id);
                 $this->template->layer = $layer;
                 $this->template->name = $layer->name;
+                $this->template->wms = $layer->wms;
+                $this->template->upperLayer = $layer->layer;
+                $this->template->upperUpperLayer = null;
+                if ($layer->layer != null)
+                {
+                    $this->template->upperUpperLayer = $layer->layer->layer;
+                }
         }
         
         public function actionBbox($id)

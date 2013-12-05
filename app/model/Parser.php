@@ -76,13 +76,13 @@ class Parser extends Nette\Object
             "bBoxEast"=> (int) $east,
             "bBoxNorth"=> (int) $north,
             "bBoxSouth"=> (int) $south,
-                    
             ));
             }
             else
             {
             $layer = $upperLayer->related("layer")->insert(array("name"=>$name,
             "title"=>$title,
+            "wms_id"=>$this->wms->id,
             "layer_id"=>$upperLayer->id,
             "abstract"=>$abstract,
             "minScale"=>$minScale,
@@ -91,11 +91,10 @@ class Parser extends Nette\Object
             "bBoxEast"=> (int) $east,
             "bBoxNorth"=> (int) $north,
             "bBoxSouth"=> (int) $south,
-                    
             ));
             }
             
-            $this->ParseAnsAddLayerToDB($layersXML->Layer, $layer);
+            $this->ParseAnsAddLayerToDB($layerXML, $layer);
             
             
         }

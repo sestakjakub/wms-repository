@@ -1,43 +1,32 @@
 {block content}
 
 <div data-role="content">
-    <table data-role="table" id="wms-table" data-mode="reflow"
-           class="ui-responsive table-stroke ui-table ui-table-reflow">
-        <thead>
-          <tr>
-            <th data-priority="1">Title</th>
-            <th data-priority="1">Abstract</th>
-            <th data-priority="5">BBox</th>
-            <th data-priority="5">Map</th>
-            
-
-          </tr>
-        </thead>
-        <tbody>
-        {foreach $layers as $layer}
     
-            <tr>
-            <th>
-                <a href="{link Layer:default $layer->id}">{$layer->title}</a>
-            </th>
-            <td>
-                {$layer->abstract}
-            </td>
-            <td>
-                <a href="{link Layer:bbox $layer->id}">BBox</a>
-            </td>
-            <td>
-                <a ref="{link Layer:map $layer->id}">Map</a>
-            </td>
-            
-        </tr>
-         {/foreach}
-        </tbody>
-    </table>
-   
+    {include #layerColapse}
+    
 </div>
 {/block}
 
+{block layerColapse}
+    {foreach $rootLayers as $layer}        
+    
+    {if ($layer->name != null)}
+    <p>
+                <a href="{link Layer:default $layer->id}">{$layer->title}</a>
+                <a href="{link Layer:bbox $layer->id}">BBox</a>
+                <a ref="{link Layer:map $layer->id}">Map</a>
+    </p>
+    {/if}
+    {if ($presenter->getUnderlayers($layer->id)->count("*")!=0)}
+    <div data-role="collapsible" data-collapsed="false" data-theme="b" data-content-theme="d">
+    <h3>{$layer->title}</h3>
+    {? $selection = $presenter->getUnderlayers($layer->id)}
+    
+    {include #layerColapse, rootLayers => $selection}
+    </div>
+    {/if}
+    {/foreach}
 
+{/block}
 
 

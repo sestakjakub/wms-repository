@@ -72,10 +72,10 @@ class Parser extends Nette\Object
             "abstract"=>$abstract,
             "minScale"=>$minScale,
             "maxScale"=>$maxScale,
-            "bBoxWest"=> (int) $west,
-            "bBoxEast"=> (int) $east,
-            "bBoxNorth"=> (int) $north,
-            "bBoxSouth"=> (int) $south,
+            "bBoxWest"=> (double) $west,
+            "bBoxEast"=> (double) $east,
+            "bBoxNorth"=> (double) $north,
+            "bBoxSouth"=> (double) $south,
             ));
             }
             else
@@ -87,10 +87,10 @@ class Parser extends Nette\Object
             "abstract"=>$abstract,
             "minScale"=>$minScale,
             "maxScale"=>$maxScale,
-            "bBoxWest"=> (int) $west,
-            "bBoxEast"=> (int) $east,
-            "bBoxNorth"=> (int) $north,
-            "bBoxSouth"=> (int) $south,
+            "bBoxWest"=> (double) $west,
+            "bBoxEast"=> (double) $east,
+            "bBoxNorth"=> (double) $north,
+            "bBoxSouth"=> (double) $south,
             ));
             }
             

@@ -1,7 +1,7 @@
 {block content}
-<div data-role="content">
-    <table data-role="table" id="wms-table" data-mode="reflow"
-           class="ui-responsive table-stroke ui-table ui-table-reflow">
+<div class="container">
+    <div class="template">
+    <table class="table">
         <thead>
           <tr>
             <th data-priority="1">Title</th>
@@ -20,21 +20,21 @@
                 {$wms->abstract}
             </td>
             <td>
-                <a data-role="button" data-inline="true" data-transition="pop" data-rel="popup" href="#popupBasic{$wms->id}">Details</a>
+                <a href="#popupBasic{$wms->id}">Details</a>
             </td>
-            <div data-role="popup" id="popupBasic{$wms->id}">
+            <!--<div data-role="popup" id="popupBasic{$wms->id}">
                 <h2>{$wms->title}</h2>
                 <h3>{$wms->abstract}</h3>
                 <h3>{$wms->name}</h3>
                 <p>{$wms->wmsUrl}</p>
                 <p>{$wms->id}</p>
                 <p>{$wms->version}</p>
-            </div>
+            </div>-->
         </tr>
         {/foreach}
         </tbody>
     </table>
-   
+    </div>
 </div>
      
 {/block}

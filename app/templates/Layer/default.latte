@@ -1,19 +1,19 @@
 {block content}
 
-<div data-role="content">
+<div class="container">
+    <div class="template">
     
 
-    <ul data-role="listview">  
-        <li data-role="list-divider">
+    <ul>  
+        <li>
             WMS
         </li>
         <li><p>WMS url: {$wms->wmsUrl}</p></li>
-        <li data-role="list-divider">
-            Hierarchy
+        <li>
+            Hierarchy:
         </li>
         <li>
-            <table data-role="table" id="wms-table" data-mode="reflow"
-                    class="ui-responsive table-stroke ui-table ui-table-reflow">
+            <table class="table">
                  <thead>
                    <tr>
                      <th data-priority="1">Object</th>
@@ -34,6 +34,7 @@
              </table>
         </li>
     </ul>
+    </div>
 </div>
 {/block}
 

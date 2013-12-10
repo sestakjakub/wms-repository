@@ -12,28 +12,29 @@
         <li>
             Hierarchy:
         </li>
-        <li>
-            <table class="table">
-                 <thead>
-                   <tr>
-                     <th data-priority="1">Object</th>
-                     <th data-priority="1">Name</th>
-                     <th data-priority="1">Title</th>
-                     <th data-priority="1">Abstract</th>
-                   </tr>
-                 </thead>
-                 <tbody>
-                 <tr>
-                     <th>WMS</th>
-                     <td>{$wms->name}</td>
-                     <td>{$wms->title}</td>
-                     <td>{$wms->abstract}</td>
-                 </tr>
-                 {include #layerRow}
-                 </tbody>
-             </table>
-        </li>
     </ul>
+    <table class="table">
+         <thead>
+           <tr>
+             <th data-priority="1">Object</th>
+             <th data-priority="1">Name</th>
+             <th data-priority="1">Title</th>
+             <th data-priority="1">Abstract</th>
+           </tr>
+         </thead>
+         <tbody>
+         <tr>
+             <th>WMS</th>
+             <td>{$wms->name}</td>
+             <td>{$wms->title}</td>
+             <td>{$wms->abstract}</td>
+         </tr>
+         {include #layerRow}
+         </tbody>
+     </table>
+     <p><a class="btn btn-primary" href="{link Layer:map $layer->id}" role="button">Show Map</a></p>
+    
+    
     </div>
 </div>
 {/block}

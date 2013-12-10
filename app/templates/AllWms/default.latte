@@ -4,14 +4,13 @@
     <table class="table">
         <thead>
           <tr>
-            <th data-priority="1">Title</th>
-            <th data-priority="1">Abstract</th>
-            <th data-priority="5">Details</th>
+            <th>Title</th>
+            <th>Abstract</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
         {foreach $wmss as $wms}
-    
             <tr>
             <th>
                 <a  href="{link Wms:default $wms->id}">{$wms->title}</a>
@@ -20,20 +19,23 @@
                 {$wms->abstract}
             </td>
             <td>
-                <a href="#popupBasic{$wms->id}">Details</a>
+                <button type="button" class="btn btn-default" data-placement="bottom"
+                        data-container="body" data-toggle="popover" data-html="true"
+                        data-content="<p><strong>WMS title:</strong>{$wms->title}</p>
+                <p><strong>WMS abstract:</strong>{$wms->abstract}<p>
+                <p><strong>WMS name:</strong>{$wms->name}</p>
+                <p><strong>WMS id:</strong>{$wms->id}</p>
+                <p><strong>version:</strong>{$wms->version}</p>"
+                data-original-title="" title="">
+                Show details
+                </button>
             </td>
-            <!--<div data-role="popup" id="popupBasic{$wms->id}">
-                <h2>{$wms->title}</h2>
-                <h3>{$wms->abstract}</h3>
-                <h3>{$wms->name}</h3>
-                <p>{$wms->wmsUrl}</p>
-                <p>{$wms->id}</p>
-                <p>{$wms->version}</p>
-            </div>-->
         </tr>
         {/foreach}
         </tbody>
     </table>
+    <p><a class="btn btn-primary" href="{link AddWms:}" role="button">Add new WMS server</a></p>
+              
     </div>
 </div>
      

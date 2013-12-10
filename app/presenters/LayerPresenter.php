@@ -27,15 +27,6 @@ class LayerPresenter extends BasePresenter
                 
         }
         
-        public function actionBbox($id)
-        {
-                $layer = $this->layerRepository->GetById($id);
-                $this->template->layer = $layer;
-                $this->template->xcenter = ($layer->bBoxEast + $layer->bBoxWest)/2;
-                $this->template->ycenter = ($layer->bBoxSouth + $layer->bBoxNorth)/2;
-                
-        }
-        
         public function actionMap($id)
         {
                 $layer = $this->layerRepository->GetById($id);

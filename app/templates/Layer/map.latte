@@ -1,13 +1,65 @@
 {* This is the welcome page, you can delete it *}
 {block head}
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.ie.css" />
+        <![endif]-->
 {/block}
 
 {block content}
 
 <div class="container">
     <div class="template">
-        Add map
+        <div id="map" style="width: 1200px; height: 800px"></div>
+
+	 <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js"></script>
+	<script>
+            
+var wmsUrl = {$wms->wmsUrl};
+var layerName = {$layer->name};
+            
+var layer = L.tileLayer.wms({$wms->wmsUrl}, {
+    layers: {$layer->name},
+    format: 'image/png',
+    crs: L.CRS.EPSG4326,
+    version: '1.3.0',
+    transparent: true,
+    attribution: "Krtiny"
+});
+
+var polygon = L.polygon([
+                    [{!$layer->bBoxNorth}, {!$layer->bBoxWest}],
+                    [{!$layer->bBoxNorth}, {!$layer->bBoxEast}],
+                    [{!$layer->bBoxSouth}, {!$layer->bBoxEast}],
+                    [{!$layer->bBoxSouth}, {!$layer->bBoxWest}]
+                ]);
+
+var cloudmadeUrl = 'http://{l}s{r}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/{l}styleId{r}/256/{l}z{r}/{l}x{r}/{l}y{r}.png',
+    cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade';
+
+var minimal   = L.tileLayer(cloudmadeUrl, {l}styleId: 22677, attribution: cloudmadeAttribution{r}),
+    motorways = L.tileLayer(cloudmadeUrl, {l}styleId: 46561, attribution: cloudmadeAttribution{r});
+
+var map = L.map('map', {
+    center: new L.LatLng({$ycenter}, {$xcenter}),
+    zoom: 10,
+    layers: [minimal, polygon, layer]
+});
+
+var baseMaps = {
+    "Minimal": minimal
+};
+
+var overlayMaps = {
+    "Layer": layer,
+    "Motorways": motorways,
+    "BoundingBox": polygon
+};
+L.control.scale().addTo(map);
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+		
+
+	</script>
     </div>
 </div>
 {/block}

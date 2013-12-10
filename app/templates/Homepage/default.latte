@@ -1,14 +1,22 @@
 {block content}
 <div class="container">
     <div class="template">
-        <ul>
-            <li>
-            <a href="{link AllWms:}">All Wms</a>
-            </li>
-            <li>
-            <a href="{link AddWms:}">Add Wms</a>
-            </li>
-        </ul>
+        <div class="jumbotron">
+            <h1>WMS repository</h1>
+            <p>You can browse our WMS calaque and add new WMS to it.</p>
+            <p><a class="btn btn-primary btn-lg" href="{link AllWms:}" role="button">Go to cataloque</a></p>
+          </div>
+            <div class="jumbotron">
+            <h1>This app is Opensource</h1>
+            <p>This app is optimised for running on OpenShift</p>
+            <p><a class="btn btn-primary btn-lg" href="https://github.com/sestakjakub/wms-repository" role="button">Browse source code</a></p>
+          </div>
+        <div class="jumbotron">
+            <h1>We provide JSON API</h1>
+            <p>You can easily access repository data from your application</p>
+            <p><a class="btn btn-primary btn-lg" href="{link Api:}" role="button">Read documentation</a></p>
+          </div>
+        
     </div>
 </div><!-- /.container -->
 

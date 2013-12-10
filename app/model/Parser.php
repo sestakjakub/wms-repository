@@ -121,6 +121,13 @@ class Parser extends Nette\Object
             "wmsUrl"=>$wmsUrl,
             "version"=>$version
             ));
+        
+        foreach ($xml->Service->KeywordList->Keyword as $keyword)
+        {
+            $stringKeyword = (string) $keyword;
+            $key = $this->connection->table("keyword")->insert(array("keyword"=>$stringKeyword));
+            $this->connection->table("wms_has_keyword")->insert(array("wms_id"=>$this->wms->id, "keyword_id"=>$key->id));
+        }
         $this->ParseAnsAddLayerToDB($xml->Capability, null);
        // $this->context->layerRepository->findAll()->insert(array("name"=>$name, "title"=>$title));
         

@@ -24,6 +24,16 @@ class WmsPresenter extends BasePresenter
         {
                 $this->wmsId = $id;
                 $this->template->rootLayers = $this->layerRepository->findAll()->where("wms_id",$id)->where("layer_id", null);
+        
+                $wms = $this->wmsRepository->getByID($id);
+                
+                $keywords = array();
+                foreach($wms->related("wms_has_keyword") as $key)
+                {
+                    $key2 = $key->keyword["keyword"];
+                    array_push($keywords, $key2);
+                }
+                $this->template->keywords = $keywords;
         }
         
         public function getUnderlayers($id) {

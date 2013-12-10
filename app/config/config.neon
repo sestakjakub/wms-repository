@@ -30,6 +30,7 @@ common:
 		router: @routerFactory::createRouter
 		wmsRepository: Wms\WmsRepository
 		layerRepository: Wms\LayerRepository
+		keywordRepository: Wms\KeywordRepository
 		parser: Wms\Parser
 
 	factories:

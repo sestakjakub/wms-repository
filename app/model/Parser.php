@@ -7,10 +7,12 @@ class Parser extends Nette\Object
     /** @var Nette\Database\Connection */
     protected $connection;
     private $wms;
+    private $keywordRepository;
 
-    public function __construct(Nette\Database\Connection $db)
+    public function __construct(Nette\Database\Connection $db, KeywordRepository $keywordRepository)
     {
         $this->connection = $db;
+        $this->keywordRepository = $keywordRepository;
     }
     
     public function ParseAnsAddLayerToDB($layersXML, $upperLayer)
@@ -125,15 +127,9 @@ class Parser extends Nette\Object
         foreach ($xml->Service->KeywordList->Keyword as $keyword)
         {
             $stringKeyword = (string) $keyword;
-            $key = $this->connection->table("keyword")->insert(array("keyword"=>$stringKeyword));
+            $key = $this->keywordRepository->GetKeywordFromName($stringKeyword);
             $this->connection->table("wms_has_keyword")->insert(array("wms_id"=>$this->wms->id, "keyword_id"=>$key->id));
         }
         $this->ParseAnsAddLayerToDB($xml->Capability, null);
-       // $this->context->layerRepository->findAll()->insert(array("name"=>$name, "title"=>$title));
-        
-//        GetCapabilitiesParser::ParseLayer($xml->Capability, null, $wmsId);
-//        return $wmsId;
-        return 1;
-
     }
 }

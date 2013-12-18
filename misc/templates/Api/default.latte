@@ -16,20 +16,22 @@
                 <tr>
                     <td>GetAllWms</td>
                     <td>
-                        <p>sample request:http://localhost/www/api/GetAllWms</p>
+                        <p>address: {link Api:allwms} </p>
                         <p>returns all wms servers in this database, including name, title, abstract</p>
+                        <p>sample request:
+                        <a  href="{link Api:allwms}">{link Api:allwms}</a>
+                        </p>
                     </td>
                 </tr>
                 <tr>
                     <td>GetAllLayersInWMSByID</td>
                     <td>
-                        <p>sample request</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td>GetLayerByLayerID</td>
-                    <td>
-                        <p>sample request</p>
+                        <p>address: {link Api:layers}/[id] </p>
+                        <p> gets - id of wms </p>
+                        <p> returns - all layers in wms server, including name, title, abstract</p>
+                        <p>sample request:
+                            <a  href="{link Api:layers 2}">{link Api:layers 2}</a>
+                        </p>
                     </td>
                 </tr>
             </tbody>

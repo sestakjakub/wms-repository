@@ -17,7 +17,32 @@ class KeywordsPresenter extends BasePresenter
 	
         public function renderDefault()
 	{
-            $this->template->keywords = $this->keywordRepository->findAll();
-	}
+            $keywordsArray = array();
+            $keywords2 = $this->keywordRepository->findAll();
+            foreach ($keywords2 as $keyword)
+            {    
+                $keywordArray["keyword"]=$keyword->keyword;
+                
+                $wmss = $keyword->related("wms_has_keyword");
+                $wmsArray = array();
+                foreach ($wmss as $wms) 
+                {
+                    array_push($wmsArray, $wms->wms);
+                }
+                $keywordArray["wms"]=$wmsArray;
+                
+                $layerss = $keyword->related("layer_has_keyword");
+                $layersArray = array();
+                foreach ($layerss as $layer) 
+                {
+                    array_push($layersArray, $layer->layer);
+                }
+                $keywordArray["layer"]=$layersArray;
+                
+                
+                array_push($keywordsArray, $keywordArray);
+            }
+            $this->template->keywords = $keywordsArray;
+     }
 
 }

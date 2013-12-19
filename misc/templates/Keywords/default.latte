@@ -10,11 +10,22 @@
               </tr>
             </thead>
             <tbody>
-            {foreach $keywords as $keyword}
+                {foreach $keywords as $keyword}
                 <tr>
                     <th>
-                    {$keyword->keyword}
+                    {$keyword["keyword"]}
                     </th>
+                    <td>
+                    {foreach $keyword["wms"] as $wms}
+                        <a  href="{link Wms:default $wms->id}">{$wms->title}</a>
+                    {/foreach}
+                    </td>
+                    <td>
+                    {foreach $keyword["layer"] as $layer}
+                        <a href="{link Layer:default $layer->id}">{$layer->title}</a>
+                    {/foreach}
+                    </td>
+                    
                 </tr>
             {/foreach}
             </tbody>

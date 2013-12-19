@@ -1,10 +1,24 @@
 {block content}
 <div class="container">
     <div class="template">
-         {foreach $keywords as $keyword}
-                <p>{$keyword->keyword}</p>
-        {/foreach}
-        
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Keyword</th>
+                <th>WMS</th>
+                <th>Layers</th>
+              </tr>
+            </thead>
+            <tbody>
+            {foreach $keywords as $keyword}
+                <tr>
+                    <th>
+                    {$keyword->keyword}
+                    </th>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
     </div>
 </div><!-- /.container -->
 

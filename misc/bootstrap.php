@@ -8,10 +8,10 @@ $configurator = new Nette\Config\Configurator;
 
 // Enable Nette Debugger for error visualisation & logging
 //$configurator->setDebugMode(TRUE);
-$configurator->enableDebugger(__DIR__ . '/../log');
+$configurator->enableDebugger(isset($_ENV['OPENSHIFT_PHP_LOG_DIR']) ? $_ENV['OPENSHIFT_PHP_LOG_DIR'] : __DIR__ . '/../log');
 
 // Specify folder for cache
-$configurator->setTempDirectory(__DIR__ . '/../temp');
+$configurator->setTempDirectory(isset($_ENV['OPENSHIFT_TMP_DIR']) ? $_ENV['OPENSHIFT_TMP_DIR'] : __DIR__ . '/../temp');
 
 // Enable RobotLoader - this will load all classes automatically
 $configurator->createRobotLoader()

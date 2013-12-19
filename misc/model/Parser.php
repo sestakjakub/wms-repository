@@ -24,7 +24,7 @@ class Parser extends Nette\Object
             $abstract = (string)  $layerXML->Abstract;
             $minScale = (double) $layerXML->minScale;
             $maxScale = (double) $layerXML->maxScale;
-                
+            
             $west = "";
             if($layerXML->EX_GeographicBoundingBox->westBoundLongitude != "")
             {
@@ -96,6 +96,16 @@ class Parser extends Nette\Object
             ));
             }
             
+            if($layerXML->KeywordList->Keyword)
+            {
+                foreach ($layerXML->KeywordList->Keyword as $keyword)
+                {
+                    $stringKeyword = (string) $keyword;
+                    $key = $this->keywordRepository->GetKeywordFromName($stringKeyword);
+                    $this->connection->table("layer_has_keyword")->insert(array("layer_id"=>$layer->id, "keyword_id"=>$key->id));
+                }
+            }
+            
             $this->ParseAnsAddLayerToDB($layerXML, $layer);
             
             
@@ -111,6 +121,10 @@ class Parser extends Nette\Object
         $abstract = (string) $xml->Service->Abstract;
         $wmsUrl = $address;
         $version = (string) $xml['version'];
+        $fees = (string) $xml->Service->fees;
+        $accessConstraints = (string) $xml->Service->accessConstraints;
+        $layerLimit = (int) $xml->Service->LayerLimit;
+            
         
         if (($name)=="" && ($title)=="")
         {
@@ -121,14 +135,19 @@ class Parser extends Nette\Object
             "title"=>$title,
             "abstract"=>$abstract,
             "wmsUrl"=>$wmsUrl,
-            "version"=>$version
+            "fees"=>$fees,
+            "accessConstraints"=>$accessConstraints,
+            "version"=>$version,
+            "layerLimit"=>$layerLimit
             ));
-        
-        foreach ($xml->Service->KeywordList->Keyword as $keyword)
+        if($xml->Service->KeywordList->Keyword)
         {
-            $stringKeyword = (string) $keyword;
-            $key = $this->keywordRepository->GetKeywordFromName($stringKeyword);
-            $this->connection->table("wms_has_keyword")->insert(array("wms_id"=>$this->wms->id, "keyword_id"=>$key->id));
+            foreach ($xml->Service->KeywordList->Keyword as $keyword)
+            {
+                $stringKeyword = (string) $keyword;
+                $key = $this->keywordRepository->GetKeywordFromName($stringKeyword);
+                $this->connection->table("wms_has_keyword")->insert(array("wms_id"=>$this->wms->id, "keyword_id"=>$key->id));
+            }
         }
         $this->ParseAnsAddLayerToDB($xml->Capability, null);
     }
